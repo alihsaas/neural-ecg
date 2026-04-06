@@ -1,0 +1,16 @@
+{
+  "name": "qrs_detection",
+  "records": "all",
+  "tolerance_s": 0.15,
+  "noise_root_seed": 2026,
+  "conditions": [
+    {"name": "clean", "index": 0, "kind": "clean"},
+    {"name": "white_24db", "index": 1, "kind": "white", "snr_db": 24.0},
+    {"name": "white_18db", "index": 2, "kind": "white", "snr_db": 18.0},
+    {"name": "white_12db", "index": 3, "kind": "white", "snr_db": 12.0},
+    {"name": "white_6db", "index": 4, "kind": "white", "snr_db": 6.0},
+    {"name": "white_0db", "index": 5, "kind": "white", "snr_db": 0.0},
+    {"name": "wander_1mv", "index": 6, "kind": "wander", "amplitude_mv": 1.0, "frequency_hz": 0.33}
+  ],
+  "paths": {"results": "results/qrs_detection"}
+}
