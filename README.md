@@ -13,3 +13,7 @@ I use the MIT-BIH Arrhythmia Database. I put the `.dat`, `.hea`, and `.atr` file
 ## QRS detection
 
 I compare a Pan-Tompkins detector with a fixed-threshold detector. Run `uv run python scripts/run_qrs_benchmark.py`.
+
+## Tests
+
+Run `uv run pytest -q --basetemp=.pytest-tmp`.
