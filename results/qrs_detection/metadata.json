@@ -1,0 +1,119 @@
+{
+  "protocol": {
+    "name": "qrs_detection",
+    "records": "all",
+    "tolerance_s": 0.15,
+    "noise_root_seed": 2026,
+    "conditions": [
+      {
+        "name": "clean",
+        "index": 0,
+        "kind": "clean"
+      },
+      {
+        "name": "white_24db",
+        "index": 1,
+        "kind": "white",
+        "snr_db": 24.0
+      },
+      {
+        "name": "white_18db",
+        "index": 2,
+        "kind": "white",
+        "snr_db": 18.0
+      },
+      {
+        "name": "white_12db",
+        "index": 3,
+        "kind": "white",
+        "snr_db": 12.0
+      },
+      {
+        "name": "white_6db",
+        "index": 4,
+        "kind": "white",
+        "snr_db": 6.0
+      },
+      {
+        "name": "white_0db",
+        "index": 5,
+        "kind": "white",
+        "snr_db": 0.0
+      },
+      {
+        "name": "wander_1mv",
+        "index": 6,
+        "kind": "wander",
+        "amplitude_mv": 1.0,
+        "frequency_hz": 0.33
+      }
+    ],
+    "paths": {
+      "results": "results/qrs_detection"
+    }
+  },
+  "records": [
+    "100",
+    "101",
+    "102",
+    "103",
+    "104",
+    "105",
+    "106",
+    "107",
+    "108",
+    "109",
+    "111",
+    "112",
+    "113",
+    "114",
+    "115",
+    "116",
+    "117",
+    "118",
+    "119",
+    "121",
+    "122",
+    "123",
+    "124",
+    "200",
+    "201",
+    "202",
+    "203",
+    "205",
+    "207",
+    "208",
+    "209",
+    "210",
+    "212",
+    "213",
+    "214",
+    "215",
+    "217",
+    "219",
+    "220",
+    "221",
+    "222",
+    "223",
+    "228",
+    "230",
+    "231",
+    "232",
+    "233",
+    "234"
+  ],
+  "lead_rule": "MLII when present, otherwise the first channel",
+  "reference_beats": "MIT-BIH beat annotations (wfdb beat symbols), whole record",
+  "snr_definition": "10*log10(var(clean record) / var(added white noise)), per record",
+  "pan_tompkins_settings": "PanTompkinsSettings(front_end=FrontEndSettings(band_low_hz=5.0, band_high_hz=15.0, band_order=2, integration_window_s=0.15, refractory_s=0.2, refine_window_s=0.1), learning_period_s=2.0, t_wave_window_s=0.36, t_wave_slope_ratio=0.5, searchback_factor=1.66, rr_history=8)",
+  "fixed_threshold_settings": "FixedThresholdSettings(front_end=FrontEndSettings(band_low_hz=5.0, band_high_hz=15.0, band_order=2, integration_window_s=0.15, refractory_s=0.2, refine_window_s=0.1), threshold_fraction=0.3, reference_percentile=99.5)",
+  "versions": {
+    "python": "3.12.13",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "wfdb": "4.3.1",
+    "matplotlib": "3.11.2",
+    "torch": "2.9.1+cu128"
+  }
+}

@@ -17,3 +17,7 @@ I compare a Pan-Tompkins detector with a fixed-threshold detector. Run `uv run p
 ## Tests
 
 Run `uv run pytest -q --basetemp=.pytest-tmp`.
+
+## QRS results
+
+The detection metrics and figures are in [results/qrs_detection](results/qrs_detection/).
