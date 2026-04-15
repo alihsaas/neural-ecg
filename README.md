@@ -25,3 +25,5 @@ The detection metrics and figures are in [results/qrs_detection](results/qrs_det
 ## Classical beat classification
 
 I compare logistic regression and LDA on RR intervals and beat shape. Run `uv run python scripts/run_classical_classification.py`.
+
+The classical results are in [results/classical_classification](results/classical_classification/). I use separate patients for the training and test sets.

@@ -1,0 +1,199 @@
+{
+  "protocol": {
+    "name": "beat_classification",
+    "classes": [
+      "N",
+      "S",
+      "V",
+      "F"
+    ],
+    "split": "inter-patient (de Chazal DS1 -> DS2), paced records 102, 104, 107, 217 excluded",
+    "train_records": [
+      "101",
+      "106",
+      "108",
+      "109",
+      "112",
+      "115",
+      "116",
+      "119",
+      "122",
+      "201",
+      "203",
+      "205",
+      "207",
+      "208",
+      "209",
+      "215",
+      "220",
+      "230"
+    ],
+    "validation_records": [
+      "114",
+      "118",
+      "124",
+      "223"
+    ],
+    "test_records": [
+      "100",
+      "103",
+      "105",
+      "111",
+      "113",
+      "117",
+      "121",
+      "123",
+      "200",
+      "202",
+      "210",
+      "212",
+      "213",
+      "214",
+      "219",
+      "221",
+      "222",
+      "228",
+      "231",
+      "232",
+      "233",
+      "234"
+    ],
+    "beat_window": {
+      "before_s": 0.25,
+      "after_s": 0.4,
+      "local_beats": 10,
+      "long_window_s": 300.0,
+      "band_low_hz": 0.5,
+      "band_high_hz": 40.0
+    },
+    "intra_patient": {
+      "test_fraction": 0.2,
+      "seed": 2026
+    },
+    "bootstrap": {
+      "resamples": 2000,
+      "seed": 2026
+    },
+    "noise_root_seed": 4242,
+    "robustness_conditions": [
+      {
+        "name": "white_24db",
+        "index": 1,
+        "kind": "white",
+        "snr_db": 24.0
+      },
+      {
+        "name": "white_18db",
+        "index": 2,
+        "kind": "white",
+        "snr_db": 18.0
+      },
+      {
+        "name": "white_12db",
+        "index": 3,
+        "kind": "white",
+        "snr_db": 12.0
+      },
+      {
+        "name": "wander_1mv",
+        "index": 6,
+        "kind": "wander",
+        "amplitude_mv": 1.0,
+        "frequency_hz": 0.33
+      }
+    ],
+    "neural": {
+      "runs": [
+        {
+          "name": "cnn_rr",
+          "use_rr": true
+        },
+        {
+          "name": "cnn_waveform",
+          "use_rr": false
+        }
+      ],
+      "seeds": [
+        11,
+        22,
+        33
+      ],
+      "epochs": 40,
+      "batch_size": 256,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "dropout": 0.3,
+      "class_weighting": "inverse sqrt frequency, normalized to mean 1",
+      "augmentation": {
+        "amplitude_low": 0.8,
+        "amplitude_high": 1.2,
+        "noise_std_mv": 0.02
+      }
+    },
+    "paths": {
+      "classical_results": "results/classical_classification",
+      "checkpoints": "checkpoints/beat_classification",
+      "neural_results": "results/beat_classification"
+    }
+  },
+  "class_counts": {
+    "train": {
+      "N": 38265,
+      "S": 731,
+      "V": 3209,
+      "F": 391
+    },
+    "validation": {
+      "N": 7559,
+      "S": 212,
+      "V": 579,
+      "F": 23
+    },
+    "test": {
+      "N": 44218,
+      "S": 1836,
+      "V": 3219,
+      "F": 388
+    },
+    "intra_patient_train": {
+      "N": 72034,
+      "S": 2223,
+      "V": 5605,
+      "F": 642
+    },
+    "intra_patient_test": {
+      "N": 18008,
+      "S": 556,
+      "V": 1402,
+      "F": 160
+    }
+  },
+  "models": {
+    "rr_logistic": "Balanced logistic regression, 7 RR features (absolute seconds and ratios)",
+    "rr_norm_logistic": "Balanced logistic regression, 3 patient-normalized RR ratios only",
+    "lda": "Shrinkage LDA, equal priors, 39 morphology samples + 7 RR features",
+    "lda_norm": "Shrinkage LDA, equal priors, 39 morphology samples + 3 normalized RR ratios",
+    "logistic": "Balanced logistic regression, 39 morphology samples + 7 RR features",
+    "logistic_norm": "Balanced logistic regression, 39 morphology samples + 3 normalized RR ratios"
+  },
+  "rr_features": [
+    "pre_rr_s",
+    "post_rr_s",
+    "local_rr_s",
+    "long_rr_s",
+    "pre_over_long",
+    "post_over_long",
+    "local_over_long"
+  ],
+  "morphology": "every 6th sample of the 0.5-40 Hz filtered beat window",
+  "hyperparameters": "fixed in code; nothing tuned on validation or test beats",
+  "versions": {
+    "python": "3.12.13",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "wfdb": "4.3.1",
+    "matplotlib": "3.11.2",
+    "torch": "2.9.1+cu128"
+  }
+}
