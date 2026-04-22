@@ -53,6 +53,8 @@ v1.0.0 from PhysioNet (ODC-By licence). I put the `.dat`, `.hea` and `.atr` file
 in `data/mitdb/` and checked all 144 of them against the published SHA-256 sums.
 `data/` is not committed.
 
+`run_study.bat` runs the whole study (tests, all three stages and the figures).
+
 ## Stage 1: QRS detection
 
 ```powershell
@@ -205,7 +207,7 @@ What I found:
 
 ```text
 neural-ecg/
-|-- pyproject.toml, uv.lock, README.md
+|-- pyproject.toml, uv.lock, README.md, run_study.bat
 |-- configs/
 |   |-- qrs_detection/protocol.json          noise conditions and seeds
 |   `-- beat_classification/protocol.json    split, features, CNN runs, seeds
